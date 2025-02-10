@@ -11,6 +11,4 @@
 	<property name="gender" />
 	<property name="salary" />	
 	</class>
-	
-
 </hibernate-mapping>
