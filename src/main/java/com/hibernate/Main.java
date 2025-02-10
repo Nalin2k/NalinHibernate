@@ -21,9 +21,9 @@ public class Main {
 		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
 		SessionFactory sf = meta.buildSessionFactory();
 		Session session = sf.openSession();
-		session.persist(vikas);        
-		Transaction tx = session.beginTransaction();
-		tx.commit();
+//		session.persist(vikas);        
+//		Transaction tx = session.beginTransaction();
+//		tx.commit();
 	}
 
 }
