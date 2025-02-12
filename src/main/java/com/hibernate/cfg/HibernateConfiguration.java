@@ -19,15 +19,12 @@ public class HibernateConfiguration {
 		ps.put(Environment.URL, "jdbc:mysql://localhost:3306/mydb");
 		ps.put(Environment.USER, "root");
 		ps.put(Environment.PASS, "root");
-		ps.put(Environment.HBM2DDL_AUTO, "create");
+		ps.put(Environment.HBM2DDL_AUTO, "update");
 		ps.put(Environment.SHOW_SQL, "true");
 		ps.put(Environment.FORMAT_SQL, "true");
 		
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().applySettings(ps).build();
-		MetadataSources meta = new MetadataSources(ssr);
-		meta.addAnnotatedClass(com.hibernate.model.Employee.class);
-		Metadata m = meta.getMetadataBuilder().build();
-		SessionFactory sessionFactory = m.buildSessionFactory();
-		return sessionFactory;
+		MetadataSources meta = new MetadataSources(ssr).addAnnotatedClass(com.hibernate.model.Employee.class);
+		return meta.getMetadataBuilder().build().buildSessionFactory();
 	}
 }
