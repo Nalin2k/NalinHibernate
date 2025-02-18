@@ -9,11 +9,11 @@ import jakarta.persistence.NamedQuery;
 
 	@NamedQuery(
 				name = "Employee.findEmployeeById", 
-				query = "FROM ducat_emp E WHERE E.id > :id"
+				query = "FROM facebook_emp E WHERE E.id > :id"
 			)
 	@NamedQuery(
 			name = "Employee.findByGender",
-			query = "SELECT e FROM ducat_emp e WHERE e.gender = :gender"
+			query = "SELECT e FROM facebook_emp e WHERE e.gender = :gender"
 			)
 	
 @Entity(name = "facebook_emp")

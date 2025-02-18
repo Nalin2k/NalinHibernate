@@ -15,14 +15,12 @@ import com.hibernate.model.Employee;
 public class Main {
 
 	public static void main(String[] args) {
-
-		
-		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
-		SessionFactory sf = meta.buildSessionFactory();
+		SessionFactory sf = meta.getSessionFactoryBuilder().build();
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction();
-		
+
 		Query<Employee> query = session.createNamedQuery("Employee.findEmployeeById", Employee.class);
 		query.setParameter("id", "1");
 		List<Employee> employees = query.getResultList();
@@ -31,7 +29,7 @@ public class Main {
 		System.out.println();
 
 		Query<Employee> q = session.createNamedQuery("Employee.findByGender", Employee.class);
-		q.setParameter("gender", "male");
+		q.setParameter("gender", "female");
 		List<Employee> employees2 = q.list();
 		System.out.println(employees2);
 		tx.commit();
