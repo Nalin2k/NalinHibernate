@@ -11,8 +11,8 @@ public class Main {
 		Employee vikas = new Employee("Rakesh", "Male", 44000);
 		Session session = HibernateConfiguration.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
-//		session.persist(vikas);
-//		tx.commit();
+		session.persist(vikas);
+		tx.commit();
 		Employee employee = session.get(Employee.class, 4);
 		System.out.println(employee);
 	}
