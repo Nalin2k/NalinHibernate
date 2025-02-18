@@ -1,8 +1,30 @@
 package com.hibernate.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
+
+	@NamedQuery(
+				name = "Employee.findEmployeeById", 
+				query = "FROM ducat_emp E WHERE E.id > :id"
+			)
+	@NamedQuery(
+			name = "Employee.findByGender",
+			query = "SELECT e FROM ducat_emp e WHERE e.gender = :gender"
+			)
+	
+@Entity(name = "facebook_emp")
 public class Employee {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
-	String name, gender;
+	
+	@Column(name = "emp_name")
+	String name;
+	String gender;
 	int salary;
 	
 	public Employee() {

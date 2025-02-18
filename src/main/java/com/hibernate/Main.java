@@ -1,5 +1,6 @@
 package com.hibernate;
 
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -7,23 +8,36 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
 import com.hibernate.model.Employee;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Employee vikas = new Employee("Vikas Kumar", "Male", 44000);
-//		Configuration cfg = new Configuration().configure(); 
-//		SessionFactory sf = new Configuration().configure().buildSessionFactory();
+
 		
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
 		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
 		SessionFactory sf = meta.buildSessionFactory();
 		Session session = sf.openSession();
-		session.persist(vikas);        
 		Transaction tx = session.beginTransaction();
+		
+		Query<Employee> query = session.createNamedQuery("Employee.findEmployeeById", Employee.class);
+		query.setParameter("id", "1");
+		List<Employee> employees = query.getResultList();
+		System.out.println(employees);
+
+		System.out.println();
+
+		Query<Employee> q = session.createNamedQuery("Employee.findByGender", Employee.class);
+		q.setParameter("gender", "male");
+		List<Employee> employees2 = q.list();
+		System.out.println(employees2);
 		tx.commit();
+		session.close();
+		sf.close();
+		
 	}
 
 }
