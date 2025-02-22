@@ -13,7 +13,7 @@ public class Address {
 	private int id;
 	private String state, city;
 	
-	@OneToOne
+	@OneToOne(mappedBy = "address")
 	private Employee employee;
 	
 	public Address() {

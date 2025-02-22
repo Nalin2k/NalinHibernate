@@ -17,8 +17,9 @@ public class Employee {
 	String name; 
 	String gender;
 	int salary;
-	
-	@OneToOne
+
+	@OneToOne (cascade = jakarta.persistence.CascadeType.ALL)
+//	@JoinColumn(name = "add_id")
 	private Address address;
 	
 	public Employee() {

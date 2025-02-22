@@ -12,20 +12,19 @@ public class Main {
 		Session session = HibernateConfiguration.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 		
-//		Address ad1 = new Address();
-//		ad1.setCity("Noida");
-//		ad1.setState("UP");
-//		Employee vikas = new Employee("Ashish", "Male", 44000);
-//		
-//		vikas.setAddress(ad1);
-//		ad1.setEmployee(vikas);
-//		
-//		 
-//		session.persist(vikas);
-//		session.persist(ad1);
-//		tx.commit();
+		Address ad1 = new Address();
+		ad1.setCity("Noida");
+		ad1.setState("UP");
+		Employee vikas = new Employee("Ashish", "Male", 44000);
 		
-		Employee employee = session.get(Employee.class, 2);
+		vikas.setAddress(ad1);
+		ad1.setEmployee(vikas);
+		
+		session.persist(vikas);
+//		session.persist(ad1);
+		tx.commit();
+		
+		Employee employee = session.get(Employee.class, 1);
 		System.out.println(employee);
 		System.out.println(employee.getAddress());
 		
